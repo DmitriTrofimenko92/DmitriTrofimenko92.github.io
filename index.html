@@ -1,0 +1,118 @@
+<!--La idea principal sera imitar el siguiente sitio web:  http://neuethemes.net/preview/gridus/?page=layouts/samuel/index.html-->
+
+<!--Como ayuda, vamos a usar "Bootstrap", que es un conjunto de recursos para ayudarnos a que nuestra web sea mas prolija y "Responsvie" --->
+<!--Que es responsive? Que reaccione de manera diferente si la pagina esta abierta en un celular (Mobile), una Table o Desktop (PC comun).-->
+
+
+<html lang="es">
+	<head>
+  	<title>Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="estilos/estilos.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style type="text/css">
+.carousel{
+    background: rgba(3, 163, 169, 0.4);
+    margin-top: 0px;
+		width: 100%;
+		height: auto;
+}
+.carousel .item img{
+    margin: 0 auto; /* Align slide image horizontally center */
+
+}
+.bs-example{
+}
+
+
+.carousel-control
+{
+	opacity: 0;
+}
+
+
+</style>
+	</head>
+
+
+
+<body>
+<header>
+	<div class="container">
+		<h1 class="header" style="max-width:10%;"> DH </h1>
+    <h4 class="header" style="max-width:10%;"> Interiorismo </h4>
+
+		<div class="tutorial">
+			<ul>
+	      <li onclick="window.location.href='index.html'">Home</li>
+	      <li> <a href="#" data-toggle="popover" title="Te la debo" data-content="Proyecto Marzo 2020">E-Shop</a></li>
+	      <li onclick="window.location.href='usuarios.html'">Usuarios</li>
+	      <li onclick="window.location.href='FAQ.html'">Preguntas Frecuentes</i>
+	      <li>Contacto</li>
+	    </ul>
+</div>
+</div>
+</header>
+
+
+
+<div class="bs-example" style="position:absolute;width:100%;height:auto;">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Carousel indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="resources/images/mesa-osb.jpeg" alt="First Slide">
+            </div>
+            <div class="item">
+                <img src="resources/images/super-cheap.jpeg" alt="Second Slide">
+            </div>
+            <div class="item">
+                <img src="resources/images/bibliotecas-melanina.jpeg" alt="Third Slide">
+            </div>
+        </div>
+        <!-- Carousel controls -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover({
+        placement : 'top'
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+	</body>
+
+</html>
