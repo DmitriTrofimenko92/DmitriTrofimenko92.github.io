@@ -70,3 +70,49 @@ header{
 .tutorial ul li:hover ul li:hover span {
   background-color: #ee204e;
 }
+
+
+
+
+
+
+.navbar-inverse
+{
+	background-image: linear-gradient(to bottom,#81d1d4 0,#9adadc 100%);
+	border: 0px;
+  margin-bottom: 0px;
+  text-align:center;
+
+
+}
+
+
+
+.container-fluid
+{
+
+}
+.navbar-nav
+{
+  position:relative;
+  margin-left:auto;
+margin-right:auto;
+
+}
+
+
+.navbar-header
+{
+  margin:auto;
+}
+
+.logo-dh
+{
+
+}
+
+
+.navbar-inverse .navbar-nav>li>a
+{
+	color: #007481;
+}
