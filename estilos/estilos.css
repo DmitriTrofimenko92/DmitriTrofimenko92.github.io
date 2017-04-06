@@ -126,6 +126,30 @@ margin: auto;
 
 
 
+.footer-hd
+{
+width: 100%;
+height: auto;
+position: absolute;
+right: 0;
+bottom: 0;
+left: 0;
+padding: 1rem;
+background-color: #efefef;
+text-align: center;
+
+background-color: rgba(3, 163, 169, 0.5);
+
+}
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 780px) {
   .navbar-inverse
   {
@@ -159,8 +183,6 @@ flex-wrap: wrap;
 justify-content: center;
 align-items: center;
     }
-
-
 
 
 }
