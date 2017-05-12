@@ -35,7 +35,122 @@
 }
 
 
-
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
+.snip1476 {
+  font-family: 'Roboto', Arial, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.snip1476 * {
+  box-sizing: border-box;
+}
+.snip1476 li {
+  display: inline-block;
+  list-style: outside none none;
+  margin: 0.5em 1em;
+  overflow: hidden;
+  position: relative;
+  border-radius: 3px;
+}
+.snip1476 li:before,
+.snip1476 li:after {
+  display: block;
+}
+.snip1476 li:before {
+  left: 0%;
+}
+.snip1476 li:after {
+  left: 50%;
+}
+.snip1476 a {
+  backface-visibility: hidden;
+  color: #e6e6e6;
+  display: block;
+  padding: 0.5em 1em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+}
+.snip1476 a:hover {
+  color: #ffffff;
+}
+.snip1476 a:before {
+  left: 25%;
+}
+.snip1476 a:after {
+  left: 75%;
+}
+.snip1476 li:before,
+.snip1476 li:after,
+.snip1476 a:before,
+.snip1476 a:after {
+  background-color: #2980b9;
+  position: absolute;
+  width: 26%;
+  top: 50%;
+  bottom: 50%;
+  content: '';
+  z-index: -1;
+  opacity: 0;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.snip1476 li:before {
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+.snip1476 li:after {
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+.snip1476 a:before {
+  -webkit-transition-delay: 0.05s;
+  transition-delay: 0.05s;
+}
+.snip1476 a:after {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+}
+.snip1476 li:hover:before,
+.snip1476 li.current:before,
+.snip1476 li:hover:after,
+.snip1476 li.current:after,
+.snip1476 li:hover a:before,
+.snip1476 li.current a:before,
+.snip1476 li:hover a:after,
+.snip1476 li.current a:after {
+  opacity: 1;
+  top: 0;
+  bottom: 0;
+}
+.snip1476 li:hover:before,
+.snip1476 li.current:before {
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+.snip1476 li:hover:after,
+.snip1476 li.current:after {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+}
+.snip1476 li:hover a:before,
+.snip1476 li.current a:before {
+  -webkit-transition-delay: 0.075s;
+  transition-delay: 0.075s;
+}
+.snip1476 li:hover a:after,
+.snip1476 li.current a:after {
+  -webkit-transition-delay: 0.225s;
+  transition-delay: 0.225s;
+}
+/* Demo purposes only */
+body {
+  background-color: #212121;
+  padding: 50px 0;
+}
 
 
 
@@ -46,25 +161,18 @@
 <body>
 	<header>
 	  <img class="logo-dh" src="resources/images/logo.png">
-		<nav class="navbar navbar-inverse">
-		  <div class="container-fluid">
-		    <div class="navbar-header">
 
-		    </div>
-		    <ul class="nav navbar-nav">
-		      <li class="active" onclick="window.location.href='index.html'"><a data-toggle="popover" title="Te la debo" data-content="Proyecto Marzo 2020">Home</a></li>
-		      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">E-Shop<span class="caret"></span></a>
-		        <ul class="dropdown-menu">
-		          <li><a href="#">Muebles de Cocina</a></li>
-		          <li><a href="#">Habitacion</a></li>
-		          <li><a href="#">Diseños</a></li>
-		        </ul>
-		      </li>
-		      <li onclick="window.location.href='usuarios.html'"><a>Usuarios</a></li>
-		      <li onclick="window.location.href='FAQ.html'"><a>Preguntas Frecuentes</a></li>
-		    </ul>
-		  </div>
-		</nav>
+<div>
+<ul class="snip1476">
+  <li class="current"><a href="#">Home</a></li>
+  <li><a href="#">About Us</a></li>
+  <li><a href="#">Blog</a></li>
+  <li><a href="#">Services</a></li>
+  <li><a href="#">Products</a></li>
+  <li><a href="#">Contact</a></li>
+</ul>
+
+</div>
 	</header>
 
 <div class="contenedordoble">
