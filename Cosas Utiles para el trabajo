@@ -1,0 +1,155 @@
+************************************************************Reporte de porductos sin foto + selector de imagenes sin subir en el Gestor de Imagenes de Glamit:
+
+
+
+
+var divMensajes = document.querySelector("#messages");
+var mainContainer = document.getElementById("page:main-container");
+
+var botones = ["Mostrar-Skus-Sin-Foto", "Seleccionar-Cuadros-Rojos"];
+
+
+//Creo los botones con los IDs del array botones
+for (var i = botones.length - 1; i >= 0; i--) {
+    var boton = document.createElement("BUTTON");
+    boton.setAttribute("height", "80px");
+    boton.setAttribute("width", "auto");
+    boton.setAttribute("style", "margin:10px;");
+    boton.innerHTML = botones[i];
+    boton.setAttribute("id", botones[i]);
+    mainContainer.insertBefore(boton, mainContainer.firstChild);
+}
+
+function llenarDivMensaje() {
+    //borro el contenido
+    while (divMensajes.firstChild) divMensajes.removeChild(divMensajes.firstChild);
+    //lo vuelvo a crear
+    var mensajeExitoUL = document.createElement("ul");
+    var mensajeExitoLI = document.createElement("li");
+    var listaUL = document.createElement("ul");
+
+    mensajeExitoUL.setAttribute("class", "messages");
+    mensajeExitoLI.setAttribute("class", "success-msg");
+
+    divMensajes.insertBefore(mensajeExitoUL, divMensajes.firstChild);
+    mensajeExitoUL.insertBefore(mensajeExitoLI, mensajeExitoUL.firstChild);
+    mensajeExitoLI.insertBefore(listaUL, mensajeExitoLI.firstChild);
+
+}
+
+
+document.getElementById("Mostrar-Skus-Sin-Foto").addEventListener("click", function() {
+    llenarDivMensaje();
+
+    var tbody = document.querySelectorAll("tbody")[0];
+    var hostname = window.location.origin;
+    var li = document.createElement("li");
+    var ul = document.querySelectorAll(".success-msg")[0];
+    var ulSucc = ul.querySelectorAll("ul")[0];
+    var separador = document.createElement("hr");
+    ulSucc.appendChild(separador);
+
+    for (i = 0; i < tbody.querySelectorAll("tr").length; ++i) {
+        var tr2 = tbody.querySelectorAll("tr")[i];
+        var aright2 = tr2.querySelectorAll("td")[1];
+        var sku = aright2.innerText;
+        var tdImagen = tr2.querySelectorAll("td")[4];
+        var divs = tdImagen.getElementsByTagName('div');
+
+
+        for (a = 0; a < divs.length; ++a) {
+
+            if (divs[a].getAttribute("style") == "padding:10px 0px;") {
+
+
+                var span = divs[a].innerText;
+                if (span.includes("NO HAY IMAGENES CARGADAS")) {
+                    var mensaje = document.createElement("li");
+                    mensaje.appendChild(document.createTextNode(sku + "_" + span.substring(span.indexOf("(") + 1).replace(")", "")));
+                    ulSucc.appendChild(mensaje);
+
+                }
+            }
+        }
+
+    }
+});
+
+
+
+document.getElementById("Seleccionar-Cuadros-Rojos").addEventListener("click", function() {
+    llenarDivMensaje();
+    alert("Usar con cuidado, podes seleccionar imagenes no deseadas.         Sugerencia: revisar las fotos seleccionadas antes de submitir");
+    var rojosSeleccionados = 0;
+    for (i = 0; i < document.getElementsByName("ids[]").length; i++) {
+        if (document.getElementsByName("ids[]")[i].getAttribute("id").length > 13) {
+            document.getElementsByName("ids[]")[i].setAttribute("checked", false);
+            rojosSeleccionados++;
+        }
+    }
+    document.querySelector(".success-msg").innerHTML = "Se han seleccionado " + rojosSeleccionados + " imagenes sin subir.";
+});
+
+
+************************************************************Sacar todas las URLs de imagenes en el gestor de Glamit:
+
+    var divMensajes = document.querySelector("#messages");
+    var mainContainer = document.getElementById("page:main-container");
+
+    function llenarDivMensaje() {
+        //borro el contenido
+        while (divMensajes.firstChild) divMensajes.removeChild(divMensajes.firstChild);
+        //lo vuelvo a crear
+        var mensajeExitoUL = document.createElement("ul");
+        var mensajeExitoLI = document.createElement("li");
+        var listaUL = document.createElement("ul");
+
+        mensajeExitoUL.setAttribute("class", "messages");
+        mensajeExitoLI.setAttribute("class", "notice-msg");
+
+        divMensajes.insertBefore(mensajeExitoUL, divMensajes.firstChild);
+        mensajeExitoUL.insertBefore(mensajeExitoLI, mensajeExitoUL.firstChild);
+        mensajeExitoLI.insertBefore(listaUL, mensajeExitoLI.firstChild);
+
+    }
+
+    llenarDivMensaje();
+
+    var tbody = document.querySelectorAll("tbody")[0];
+    var hostname = window.location.origin;
+    var li = document.createElement("li");
+    var ul = document.querySelectorAll(".notice-msg")[0];
+    var ulSucc = ul.querySelectorAll("ul")[0];
+    // var separador = document.createElement("hr");
+    // ulSucc.appendChild(separador);
+
+    for (i = 0; i < tbody.querySelectorAll("tr").length; ++i) {
+        var tr2 = tbody.querySelectorAll("tr")[i];
+        var aright2 = tr2.querySelectorAll(".skuprod")[0];
+        var sku = aright2.innerText;
+        var tdImagen = tr2.querySelectorAll(".imagenes")[0];
+        var divs = tdImagen.querySelectorAll('.imagenescolor');
+
+
+
+        for (a = 0; a < divs.length; ++a) {
+            var span = divs[a].innerText;
+            var colorspan = divs[a].querySelectorAll('span')[0].innerText;
+
+            var mensaje = document.createElement("li");
+            mensaje.appendChild(document.createTextNode(sku + "_" + colorspan.substring(span.indexOf("(") + 1).replace(")", "")));
+            ulSucc.appendChild(mensaje);
+
+
+
+            for (var b = 0; b < divs[a].getElementsByTagName("IMG").length; ++b) {
+
+                var mensaje = document.createElement("li");
+                mensaje.appendChild(document.createTextNode(divs[a].getElementsByTagName("IMG")[b].getAttribute("src")));
+                ulSucc.appendChild(mensaje);
+
+            }
+
+        }
+    }
+
