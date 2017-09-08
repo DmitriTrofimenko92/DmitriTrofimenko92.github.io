@@ -1,0 +1,255 @@
+*****************************************************Template basico para sacar informacion de publicaciones de MLA*****************************************************
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sacar Info MLA</title>
+  </head>
+  <body>
+    <form class="" action="" method="get">
+      Ingresa el ID de una publicacion reciente. Ej: MLA603354881<br><br>
+      Publicacion: <input type="text" name="public" value="">
+    </form>
+  </body>
+  <br>
+  <br>
+  <br>
+</html>
+
+
+
+<?php
+$base = $_GET["public"];
+$jsonMLA = json_decode(file_get_contents("https://api.mercadolibre.com/items/" . $base));
+$seller_id = $jsonMLA->seller_id;
+
+echo "seller_id: " . $seller_id;
+
+?>
+
+
+
+*****************************************************Mostrar los talles compatibles dentro de las categorias de MLA.*****************************************************
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Investigar Talles MLA</title>
+  </head>
+  <body>
+    <form class="" action="" method="get">
+      Categoria: <input type="text" name="base" value="">
+    </form>
+  </body>
+  <br>
+  <br>
+  <br>
+</html>
+
+
+
+<?php
+$base = $_GET["base"];
+$jsonMLA = json_decode(file_get_contents("https://api.mercadolibre.com/categories/" . $base));
+$cantidadimagenes = count($jsonMLA->children_categories);
+
+echo "Categoria padre: " . $jsonMLA->id . "  <br> Nombre: " . $jsonMLA->name;
+echo "<br>";
+echo "<br>";
+echo "children_categories:";
+echo "<br>";
+echo "<table style='width:70%'>";
+echo  "<tr><th align='left'>ID MLA</th><th align='left'>Nombre Categoria</th><th align='left'>Talles disponibles</th></tr>";
+
+
+
+$arrayImagenes = $jsonMLA->children_categories;
+
+
+function atributos($input){
+
+$array = array();
+$jsonMLA2 = json_decode(file_get_contents("https://api.mercadolibre.com/categories/" . $input . "/attributes"));
+
+
+for ($b = 0; $b < count($jsonMLA2); $b++) {
+  if($jsonMLA2[$b]->id == "93000" || $jsonMLA2[$b]->id == "73002" || $jsonMLA2[$b]->id == "103000" || $jsonMLA2[$b]->id == "30000" ){
+$sizeindex = $b;
+      }
+};
+
+
+
+    for ($a = 0; $a < count($jsonMLA2[$sizeindex]->values); $a++) {
+		array_push($array, $jsonMLA2[$sizeindex]->values[$a]->name);
+    };
+
+return implode("-", $array);
+};
+
+
+for ($i = 0; $i < $cantidadimagenes; $i++) {
+print_r(" <tr> <td>" . $arrayImagenes[$i]->id . "</td><td>" . $arrayImagenes[$i]->name . "</td><td>" . atributos($arrayImagenes[$i]->id) .  "</td></tr>" );
+};
+
+
+echo "</table>";
+ ?>
+ 
+ 
+ 
+ 
+ 
+***************************************************** Ver informacion completa de un item en MLA*****************************************************
+ 
+ <?php
+$idMLA = "MLA677245171";
+$jsonMLA = json_decode(file_get_contents("https://api.mercadolibre.com/items/" . $idMLA));
+$cantidadimagenes = count($jsonMLA->pictures);
+$arrayImagenes = $jsonMLA->pictures;
+$id = $jsonMLA->id;
+$permalink = $jsonMLA->permalink;
+$title = $jsonMLA->title;
+$price = $jsonMLA->price;
+$available_quantity = $jsonMLA->available_quantity;
+$thumbnail = $jsonMLA->thumbnail;
+
+print_r("<img src='". $thumbnail ."'>");
+echo "<br>";
+print_r("<b>El ID es: </b>" . $id);
+echo "<br>";
+print_r("<b>URL: </b>". $permalink);
+echo "<br>";
+print_r("<b>Titulo: </b>" . $title);
+echo "<br>";
+print_r("<b>Precio: </b>" . $price);
+echo "<br>";
+print_r("<b>STOCK: </b>" . $available_quantity);
+echo "<br>";
+print_r("<b>Cantidad de Imagenes: </b>" . $cantidadimagenes);
+echo "<br>";
+for ($i = 0; $i < $cantidadimagenes; $i++) {
+    print_r($arrayImagenes[$i]->secure_url ."<br>" );
+}
+?>
+
+
+
+*****************************************************Explorar variaciones de un item en MLA*******************************************
+https://api.mercadolibre.com/pictures/297405-MLA25016792632_082016
+
+
+  $url = "https://api.mercadolibre.com/items/MLA632440010/pictures?access_token=**********************************";
+  $idMLA = "MLA632440010";
+  $jsonMLA = json_decode(file_get_contents("https://api.mercadolibre.com/items/" . $idMLA));
+  $cantidadVariaciones = count($jsonMLA->variations);
+  $arrayVariaciones = $jsonMLA->variations;
+  $id = $jsonMLA->id;
+  $permalink = $jsonMLA->permalink;
+  $title = $jsonMLA->title;
+  $price = $jsonMLA->price;
+  $available_quantity = $jsonMLA->available_quantity;
+  $thumbnail = $jsonMLA->thumbnail;
+
+
+
+
+
+  for ($i = 0; $i < $cantidadVariaciones; $i++) {
+   print_r($arrayVariaciones[$i]->id . "<br> sku:" . $arrayVariaciones[$i]->seller_custom_field . "<br>" . " Imagenes: <br>" . $arrayVariaciones[$i]->picture_ids[0] . "<br>" .
+           $arrayVariaciones[$i]->picture_ids[1] . "<br>" .
+           $arrayVariaciones[$i]->picture_ids[2] . "<br>" .
+           $arrayVariaciones[$i]->picture_ids[3] . "<br>" .
+           $arrayVariaciones[$i]->picture_ids[4] . "<br>" .
+           $arrayVariaciones[$i]->picture_ids[5] . "<br>"
+
+
+          );
+
+
+  }
+  
+  
+  
+  
+*******************************Template para insertar un formulario que predice la categoria de un ITEM segun un string, usando la API de MLA
+  var divtest = document.createElement("div");
+divtest.setAttribute("id","dmitriMLA")
+divtest.setAttribute("style", "position: absolute;top: 180px ;left: 20;" )
+document.querySelector(".middle").appendChild(divtest)
+
+for(i = 0; i < document.querySelectorAll("label").length; i++){
+if(document.querySelectorAll("label")[i].getAttribute("for") == "mercadolibre_publish"){
+    console.log(document.querySelectorAll("label")[i].parentElement.nextElementSibling)
+  document.querySelectorAll("label")[i].parentElement.parentElement.setAttribute("style", "position: absolute;top: 40px ;left: 20;" )
+
+  }
+
+if(document.querySelectorAll("label")[i].getAttribute("for") == "mercadolibre_category"){
+    console.log(document.querySelectorAll("label")[i].parentElement.nextElementSibling)
+    var categ = document.querySelectorAll("label")[i]
+    document.querySelectorAll("label")[i].parentElement.parentElement.setAttribute("style", "position: absolute; top: 90px ; left: 20;" )
+  }
+
+ if(document.querySelectorAll("label")[i].getAttribute("for") == "name"){
+      console.log(document.querySelectorAll("label")[i].parentElement.nextElementSibling)
+      var categ = document.querySelectorAll("label")[i]
+      document.querySelectorAll("label")[i].parentElement.parentElement.setAttribute("style", "position: absolute; top: 130px ; left: 20;" )
+    }
+}
+var nombreproducto = document.createElement("input");
+nombreproducto.setAttribute("placeholder", "Nombre A Predecir");
+nombreproducto.setAttribute("type", "text");
+nombreproducto.setAttribute("style", "margin:10px; height:50px;width:400px");
+nombreproducto.setAttribute("id", "nombreproducto");
+divtest.insertBefore(nombreproducto, divtest.firstChild);
+
+
+var boton = document.createElement("BUTTON");
+boton.setAttribute("height", "80px");
+boton.setAttribute("width", "auto");
+boton.setAttribute("style", "margin:10px;");
+boton.innerHTML = "Predecir Categoria"
+boton.setAttribute("id", "predecir-categoria");
+divtest.appendChild(boton);
+
+
+
+var path = document.createElement("BUTTON");
+path.setAttribute("id", "path");
+divtest.appendChild(path);
+
+document.querySelector("#path").setAttribute("style", "position: absolute ;top: 100px;left: 10px;" )
+
+
+function crearSpan(text){
+var span = document.createElement("span");
+span.innerText = text + " >> "
+path.appendChild(span);
+}
+
+
+function predecir(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.querySelector("#mercadolibre_category").setAttribute("value", JSON.parse(this.responseText).id )
+      while (path.firstChild) path.removeChild(path.firstChild);
+
+      for(a = 0; a < JSON.parse(this.responseText).path_from_root.length;a++){
+        console.log(JSON.parse(this.responseText).path_from_root[a].name)
+        var text = JSON.parse(this.responseText).path_from_root[a].name
+        crearSpan(text)
+      }
+    }
+  };
+  xhttp.open("GET", "https://api.mercadolibre.com/sites/MLA/category_predictor/predict?title=" +  encodeURI(document.querySelector("#nombreproducto").value) , true);
+  xhttp.send();
+  }
+
+
+
+  document.getElementById("predecir-categoria").addEventListener("click", function() {
+     predecir()
+  });
